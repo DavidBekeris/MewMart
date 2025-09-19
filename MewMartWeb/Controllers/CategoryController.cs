@@ -21,5 +21,19 @@ namespace MewMartWeb.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Create(Category obj)
+        {
+            if (obj.Name == obj.DisplayOrder.ToString()){
+                ModelState.AddModelError("name", "Category name and display order cannot be the same.");
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Category"); // Can change category to other controller if another view should be used
+            }
+            return View();
+        }
     }
 }
