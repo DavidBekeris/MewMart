@@ -24,14 +24,11 @@ namespace MewMartWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            if (obj.Name == obj.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("name", "Kategori namn och visnings order kan inte vara samma.");
-            }
-            if (obj.Name.ToLower() == "test")
-            {
-                ModelState.AddModelError("", "Får inte heta test.");
-            }
+            // Bara för att testa!
+            //if (obj.Name == obj.DisplayOrder.ToString())
+            //{
+            //    ModelState.AddModelError("", "Kategori namn och visnings order kan inte vara samma.");
+            //}
             if (ModelState.IsValid)
             {
                 _db.Categories.Add(obj);
