@@ -10,10 +10,10 @@ namespace MewMartWeb.Models
 
         [Required]
         [MaxLength(50)]
-        [DisplayName("Category Name")]
+        [DisplayName("Kategori Namn")]
         public string Name { get; set; }
 
-        [DisplayName("Display Order")]
+        [DisplayName("Visnings Order")]
         [Range(1,100, ErrorMessage ="Numret måste vara mellan 1 och 100.")]
         public int DisplayOrder { get; set; }
     }

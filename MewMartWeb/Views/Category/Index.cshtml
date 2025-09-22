@@ -1,15 +1,19 @@
 ﻿@model List<Category>
 
+@{
+    ViewData["Title"] = "Kategorier - MewMart";
+}
+
 <div class="container">
     <div class="row pt-4 pb-3">
         <div class="col-6">
             <h2 class="text-primary">
-                Category List
+                Kategori lista
             </h2>
         </div>
         <div class="col-6 text-end">
             <a asp-controller="Category" asp-action="Create" class="btn-primary text-light">
-                <i class="bi bi-plus-circle"></i> Create new category
+                <i class="bi bi-plus-circle"></i> Skapa ny kategori
             </a>
         </div>
     </div>
@@ -18,10 +22,10 @@
     <thead>
     <tr>
         <th>
-            Category name
+            Kategori Namn
         </th>
         <th>
-            Display Order
+            Visnings Order
         </th>
     </tr>
     </thead>
