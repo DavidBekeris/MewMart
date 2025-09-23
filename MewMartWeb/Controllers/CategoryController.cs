@@ -58,9 +58,35 @@ namespace MewMartWeb.Controllers
             {
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
-                return RedirectToAction("Index", "Category"); // Can change category to other controller if another view should be used
+                return RedirectToAction("Index", "Category");
             }
             return View();
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Category? categoryFromDb = _db.Categories.Find(id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int? id)
+        {
+            Category? obj = _db.Categories.Find(id);
+            if ( obj == null)
+            {
+                return NotFound();
+            }
+            _db.Categories.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Category");
         }
     }
 }
