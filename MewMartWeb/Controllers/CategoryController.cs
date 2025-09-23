@@ -33,6 +33,7 @@ namespace MewMartWeb.Controllers
             {
                 _db.Categories.Add(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Kategorin har blivit skapad!";
                 return RedirectToAction("Index", "Category"); // Can change category to other controller if another view should be used
             }
             return View();
@@ -58,6 +59,7 @@ namespace MewMartWeb.Controllers
             {
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Kategorin har blivit redigerad!";
                 return RedirectToAction("Index", "Category");
             }
             return View();
@@ -86,6 +88,7 @@ namespace MewMartWeb.Controllers
             }
             _db.Categories.Remove(obj);
             _db.SaveChanges();
+            TempData["success"] = "Kategorin har blivit raderad!";
             return RedirectToAction("Index", "Category");
         }
     }
