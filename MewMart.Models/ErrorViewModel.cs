@@ -1,4 +1,4 @@
-namespace MewMartWeb.Models
+namespace MewMart.Models
 {
     public class ErrorViewModel
     {

@@ -1,5 +1,5 @@
-﻿using MewMartWeb.Data;
-using MewMartWeb.Models;
+﻿using MewMart.DataAccess.Data;
+using MewMart.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewMartWeb.Controllers

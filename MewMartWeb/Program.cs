@@ -1,4 +1,4 @@
-using MewMartWeb.Data;
+using MewMart.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

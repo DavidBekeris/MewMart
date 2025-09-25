@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using MewMartWeb.Models;
+using MewMart.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MewMartWeb.Controllers

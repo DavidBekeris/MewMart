@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MewMartWeb.Migrations
+namespace MewMart.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoryTableToDB : Migration
