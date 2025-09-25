@@ -4,36 +4,51 @@
     ViewData["Title"] = "Skapa kategori - MewMart";
 }
 
-<form method="post" class="">
-    <div class="border p-3 mt-4">
-        <div class="row pb-2">
-            <h2 class="text-primary">
-                Skapa kategori
-            </h2>
-            </hr>
+<div class="card shadow border mt-4">
+    <dív class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">
+                    Skapa kategori
+                </h2>
+            </div>
         </div>
-        <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="mb-3 row p-1">
-            <label asp-for="Name"  class="p-0"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="mb-3 row p-1">
-            <label asp-for="DisplayOrder" class="p-0"></label>
-            <input asp-for="DisplayOrder" class="form-control" />
-            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 150px">
-            Skapa
-        </button>
-        <a asp-controller="Category" asp-action="Index" class="btn btn-secondary " style="width: 150px">
-            Tillbaka till listan
-        </a>
+    </dív>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div class="border p-3">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Name" class="form-control border-0 shadow" />
+                    <label asp-for="Name" class="ms-2"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="DisplayOrder" class="form-control border-0 shadow" />
+                    <label asp-for="DisplayOrder" class="ms-2"></label>
+                    <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">
+                            Skapa
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-outline-primary border form-control">
+                            Tillbaka till listan
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-</form>
+</div>
+
+
 
 @section Scripts {
     @{
-        <partial name="_ValidationScriptsPartial"/>
+        <partial name="_ValidationScriptsPartial" />
     }
 }
