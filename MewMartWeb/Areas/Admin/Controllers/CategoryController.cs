@@ -3,7 +3,7 @@ using MewMart.DataAccess.Repository.IRepository;
 using MewMart.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MewMartWeb.Controllers
+namespace MewMartWeb.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {

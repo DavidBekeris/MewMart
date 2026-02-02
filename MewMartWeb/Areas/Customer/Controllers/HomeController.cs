@@ -2,7 +2,7 @@ using System.Diagnostics;
 using MewMart.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MewMartWeb.Controllers
+namespace MewMartWeb.Areas.Customer.Controllers
 {
     public class HomeController : Controller
     {
