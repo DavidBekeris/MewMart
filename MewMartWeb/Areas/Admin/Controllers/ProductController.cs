@@ -1,6 +1,7 @@
 ﻿using MewMart.DataAccess.Data;
 using MewMart.DataAccess.Repository.IRepository;
 using MewMart.Models;
+using MewMart.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections;
@@ -22,25 +23,42 @@ namespace MewMartWeb.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+            //IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+            //{
+            //    Text = u.Name,
+            //    Value = u.Id.ToString(),
+            //});
+            //ViewBag.CategoryList = CategoryList;
+            //ViewData["CategoryList"]= CategoryList;
+            ProductVM productVM = new ProductVM()
+            {
+                CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
             {
                 Text = u.Name,
                 Value = u.Id.ToString(),
-            });
-            ViewBag.CategoryList = CategoryList;
-            return View();
+            }),
+                Product = new Product()
+            };
+            return View(productVM);
         }
         [HttpPost]
-        public IActionResult Create(Product obj)
+        public IActionResult Create(ProductVM productVM)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(obj);
+                _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Produkten har blivit skapad!";
                 return RedirectToAction("Index", "Product"); // Can change Product to other controller if another view should be used
             }
-            return View();
+            else {
+                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString(),
+                });
+                return View(productVM);
+            }
         }
 
         public IActionResult Edit(int? id)
