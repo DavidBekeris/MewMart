@@ -33,7 +33,8 @@ namespace MewMart.DataAccess.Data
                     Prize = 23,
                     Prize2 = 21,
                     Prize5 = 18,
-                    CategoryId = 1
+                    CategoryId = 1,
+                    ImageUrl=""
                 },
 new Product
 {
@@ -46,7 +47,8 @@ new Product
     Prize = 23,
     Prize2 = 21,
     Prize5 = 18,
-    CategoryId = 1
+    CategoryId = 1,
+    ImageUrl = ""
 },
  new Product
  {
@@ -59,7 +61,8 @@ new Product
      Prize = 23,
      Prize2 = 21,
      Prize5 = 18,
-     CategoryId = 2
+     CategoryId = 2,
+     ImageUrl = ""
  },
     new Product
     {
@@ -72,7 +75,8 @@ new Product
         Prize = 23,
         Prize2 = 21,
         Prize5 = 18,
-        CategoryId = 2
+        CategoryId = 2,
+        ImageUrl = ""
     },
 new Product
 {
@@ -85,7 +89,8 @@ new Product
     Prize = 23,
     Prize2 = 21,
     Prize5 = 18,
-    CategoryId = 3
+    CategoryId = 3,
+    ImageUrl = ""
 },
  new Product
  {
@@ -99,7 +104,8 @@ new Product
 
      Prize2 = 21,
      Prize5 = 18,
-     CategoryId = 3
+     CategoryId = 3,
+     ImageUrl = ""
  }
 
                 );
