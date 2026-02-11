@@ -2,6 +2,8 @@
 using MewMart.DataAccess.Repository.IRepository;
 using MewMart.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections;
 
 namespace MewMartWeb.Areas.Admin.Controllers
 {
@@ -20,6 +22,12 @@ namespace MewMartWeb.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString(),
+            });
+            ViewBag.CategoryList = CategoryList;
             return View();
         }
         [HttpPost]
