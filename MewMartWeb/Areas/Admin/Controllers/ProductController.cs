@@ -54,14 +54,23 @@ namespace MewMartWeb.Areas.Admin.Controllers
                 if (file != null)
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string productPath = Path.Combine(wwwwRootPath, @"images\product");
 
-                    using( var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    // Physical folder path (for saving the file)
+                    string productPath = Path.Combine(wwwwRootPath, "images", "product");
+
+                    // Make sure directory exists
+                    if (!Directory.Exists(productPath))
+                    {
+                        Directory.CreateDirectory(productPath);
+                    }
+
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
                     {
                         file.CopyTo(fileStream);
                     }
 
-                    productVM.Product.ImageUrl = @"\images\product" + fileName;
+                    // URL path (for displaying in browser)
+                    productVM.Product.ImageUrl = "/images/product/" + fileName;
                 }
                 _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Save();
