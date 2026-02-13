@@ -25,7 +25,7 @@ namespace MewMart.Models
         public string Manufacturer { get; set; }
         [Required]
         [Display(Name = "List Pris")]
-        [Range (1,1000)]
+        [Range(1, 1000)]
         public double ListPrize { get; set; }
         [Required]
         [Display(Name = "Pris")]
@@ -46,6 +46,7 @@ namespace MewMart.Models
         [ValidateNever]
         public Category Category { get; set; }
 
+        [ValidateNever]
         public string ImageUrl { get; set; }
     }
 }
