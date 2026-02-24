@@ -48,43 +48,55 @@ namespace MewMartWeb.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Upsert(ProductVM productVM, IFormFile? file)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                string wwwwRootPath = _webHostEnvironment.WebRootPath;
-                if (file != null)
-                {
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-
-                    // Physical folder path (for saving the file)
-                    string productPath = Path.Combine(wwwwRootPath, "images", "product");
-
-                    // Make sure directory exists
-                    if (!Directory.Exists(productPath))
-                    {
-                        Directory.CreateDirectory(productPath);
-                    }
-
-                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
-                    {
-                        file.CopyTo(fileStream);
-                    }
-
-                    // URL path (for displaying in browser)
-                    productVM.Product.ImageUrl = "/images/product/" + fileName;
-                }
-                _unitOfWork.Product.Add(productVM.Product);
-                _unitOfWork.Save();
-                TempData["success"] = "Produkten har blivit skapad!";
-                return RedirectToAction("Index", "Product"); // Can change Product to other controller if another view should be used
-            }
-            else {
                 productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString(),
                 });
+
                 return View(productVM);
             }
+
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+
+            if (file != null)
+            {
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                string productPath = Path.Combine(wwwRootPath, "images", "product");
+
+                if (!Directory.Exists(productPath))
+                {
+                    Directory.CreateDirectory(productPath);
+                }
+
+                // Delete old image if replacing
+                if (!string.IsNullOrWhiteSpace(productVM.Product.ImageUrl))
+                {
+                    // ImageUrl is like "/images/product/xxx.jpg"
+                    string oldImagePath = Path.Combine(wwwRootPath, productVM.Product.ImageUrl.TrimStart('/', '\\'));
+
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
+                using var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create);
+                file.CopyTo(fileStream);
+
+                productVM.Product.ImageUrl = "/images/product/" + fileName;
+            }
+
+            if (productVM.Product.Id == 0)
+                _unitOfWork.Product.Add(productVM.Product);
+            else
+                _unitOfWork.Product.Update(productVM.Product);
+
+            _unitOfWork.Save();
+            TempData["success"] = "Produkten har blivit skapad!";
+            return RedirectToAction("Index", "Product");
         }
 
         //public IActionResult Edit(int? id)
