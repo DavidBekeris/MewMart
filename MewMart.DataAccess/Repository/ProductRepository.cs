@@ -14,7 +14,23 @@ namespace MewMart.DataAccess.Repository
 
         public void Update(Product obj)
         {
-            _db.Products.Update(obj);
+            var objFromDb = _db.Products.FirstOrDefault( u => u.Id == obj.Id);
+            if (objFromDb != null) 
+            { 
+                objFromDb.Title = obj.Title;
+                objFromDb.Description = obj.Description;
+                objFromDb.Category = obj.Category;
+                objFromDb.ISBN = obj.ISBN;
+                objFromDb.Manufacturer = obj.Manufacturer;
+                objFromDb.Prize = obj.Prize;
+                objFromDb.Prize2 = obj.Prize2;
+                objFromDb.Prize5 = obj.Prize5;
+                objFromDb.CategoryId = obj.CategoryId;
+                if (obj.ImageUrl != null)
+                {
+                    objFromDb.ImageUrl = obj.ImageUrl;
+                }
+            }
         }
     }
 }
