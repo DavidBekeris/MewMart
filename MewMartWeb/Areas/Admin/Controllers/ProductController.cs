@@ -1,10 +1,8 @@
-﻿using MewMart.DataAccess.Data;
-using MewMart.DataAccess.Repository.IRepository;
+﻿using MewMart.DataAccess.Repository.IRepository;
 using MewMart.Models;
 using MewMart.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections;
 
 namespace MewMartWeb.Areas.Admin.Controllers
 {
@@ -19,7 +17,7 @@ namespace MewMartWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
             return View(objProductList);
         }
 
@@ -28,10 +26,10 @@ namespace MewMartWeb.Areas.Admin.Controllers
             ProductVM productVM = new ProductVM()
             {
                 CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
-            {
-                Text = u.Name,
-                Value = u.Id.ToString(),
-            }),
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString(),
+                }),
                 Product = new Product()
             };
 
@@ -41,7 +39,7 @@ namespace MewMartWeb.Areas.Admin.Controllers
             }
             else //Update product
             {
-                productVM.Product = _unitOfWork.Product.Get(u=>u.Id==id);
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
                 return View(productVM);
             }
         }
@@ -155,13 +153,14 @@ namespace MewMartWeb.Areas.Admin.Controllers
         #region API CALLS
 
         [HttpGet]
-        public IActionResult GetAll() 
+        public IActionResult GetAll()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
-            return Json(new {data =objProductList});
+            return Json(new { data = objProductList });
         }
 
-        
+
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
             var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
